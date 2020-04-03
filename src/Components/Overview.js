@@ -1,18 +1,22 @@
 import React from 'react';
 // import './Overview.css';
 
-function Overview({ allRuns }) {
+function Overview({ user, allRuns }) {
   const averageTime = stringifyDuration(getAverageRunningTime(allRuns))
+  const bestTime = stringifyDuration(getBestTime(allRuns))
   const totalTime = stringifyDuration(getTotalRunningTime(allRuns))
   const totalDistance = allRuns.length * 5
 
   return (
-    <>
-      <h3>Overview Stats</h3>
-      <p><b>Average run time:</b> {averageTime}</p>
-      <p><b>Total run time:</b> {totalTime}</p>
-      <p><b>Total run distance:</b> {totalDistance}km</p>
-    </>
+    <div className='Overview'>
+      <p>You have completed {allRuns.length} runs in {user.eventCount} events</p>
+      <p>
+        <b>Average run time:</b> {averageTime}<br />
+        <b>Personal best:</b> {bestTime}<br />
+        <b>Total run time:</b> {totalTime}<br />
+        <b>Total run distance:</b> {totalDistance}km
+      </p>
+    </div>
   );
 }
 
@@ -20,16 +24,6 @@ function Overview({ allRuns }) {
  * Returns a string representation of the duration in the format of HH:MM:SS or MM:SS
  * @param {number} secs the number of seconds to be formatted
  */
-// const secondsToStringDuration = secs => {
-//   var date = new Date(0);
-//   date.setSeconds(secs);
-  
-//   if (secs >= 3600)
-//     return date.toISOString().substr(11, 8)
-//   else
-//     return date.toISOString().substr(14, 5)
-// }
-
 const stringifyDuration = secs => {
   const days = secs / 86400
   const hours = (days % 1) * 24
@@ -47,6 +41,10 @@ const stringifyDuration = secs => {
     .filter(part => part !== 0)
   
   return parts.join(', ').replace(/,([^,]*)$/, ' and $1')
+}
+
+const getBestTime = runs => {
+  return Math.min(...runs.map(run => run.time))
 }
 
 /**
