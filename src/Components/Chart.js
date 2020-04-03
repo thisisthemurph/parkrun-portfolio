@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Line } from 'react-chartjs-2'
 
-// import './Chart.scss';
+import './Chart.scss';
 
 class Chart extends Component {
   constructor(props) {

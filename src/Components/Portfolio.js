@@ -25,37 +25,37 @@ function Portfolio({ user, loading }) {
   return (
     <div>
       <h2>{user.name}</h2>
-      <section>
-        <h3>Your Events</h3>
-        <p>You have competed at {user.eventCount} events and completed a total of {allRuns.length} runs</p>
-      </section>
       
-      {/* <Overview allRuns={allRuns} /> */}
+      <Overview user={user} allRuns={allRuns} />
       <Chart chartData={getChartData(allRuns)}/>
     </div>
   )
 }
 
 const getChartData = runs => {
-  
+
   const runData = runs.map(run => {
     const mins = Math.floor(run.time / 60)
     const secs = run.time - mins * 60
     return parseFloat(`${mins}.${secs}`)
   })
 
-  const data = {
-    labels: runs.map(run => moment(run.date).format('DD/MM/YYYY')),
+  // Use colors to highlight the personal bests
+  const colors = runs.map(run => run.pb ? 'rgba(0, 255, 0, 0.6)' : 'rgba(255, 99, 132, 0.6)')
+
+  return {
+    labels: runs.map(run => moment(run.date).format('DD MMM YY')),
     datasets:[
       {
         label: 'All time parkrun progress',
         data: runData,
-        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+        backgroundColor: colors
       }
-    ]
+    ],
+    options: {
+      responsive: true
+    }
   }
-
-  return data
 }
 
 /**
