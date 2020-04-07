@@ -1,6 +1,6 @@
 const Color = require('color')
 
-const colorNames = {
+export const colorAssistant = {
   'navy':     Color('rgb(0, 31, 63)'),
   'blue':     Color('rgb(0, 116, 217)'),
   'aqua':     Color('rgb(127, 219, 255)'),
@@ -14,13 +14,9 @@ const colorNames = {
   'maroon':   Color('rgb(133, 20, 75)'),
   'fuchsia':  Color('rgb(240, 18, 190)'),
   'purple':   Color('rgb(177, 13, 201)'),
-  // 'black':    Color('rgb(17, 17, 17)'),
+  'black':    Color('rgb(17, 17, 17)'),
   'gray':     Color('rgb(170, 170, 170)'),
   'silver':   Color('rgb(221, 221, 221)')
 }
 
-const niceHexColors = () => {
-  return Object.values(colorNames).map(color => color.hex())
-}
-
-export default niceHexColors
+export const niceHexColors = Object.values(colorAssistant).map(color => color.hex())
