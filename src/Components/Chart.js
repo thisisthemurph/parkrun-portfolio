@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
-import { Line } from 'react-chartjs-2'
+import { Line, Pie } from 'react-chartjs-2'
 
 import './Chart.scss';
 
 class Chart extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      chartData: props.chartData
-    }
-  }
 
   render() {
+    let chart;
+    if (this.props.chartType === 'line') {
+      chart = <Line data={this.props.data} />
+    } else {
+      chart = <Pie data={this.props.data} />
+    }
+
     return (
       <div className="Chart">
-        <Line data={this.state.chartData} />
+        {chart}
       </div>
     );
   }
