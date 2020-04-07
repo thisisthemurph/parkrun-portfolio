@@ -3,17 +3,18 @@ import Loading from './Loading'
 import Overview from './Overview'
 import Chart from './Chart'
 import ChartListContainer from './ChartListContainer'
+import { colorAssistant, niceHexColors } from './colorAssistant'
+import { stringifyDuration } from './timeAssistant'
 
 import moment from 'moment'
 import _ from 'underscore'
-import niceHexColors from './colorAssistant'
 
 import './Portfolio.scss'
 
 
 class Portfolio extends Component {
   state = {
-    colorList: _.shuffle(niceHexColors())
+    colorList: _.shuffle(niceHexColors)
   }
 
   render() {
@@ -32,7 +33,8 @@ class Portfolio extends Component {
   
     const allRuns = this.flatternUserEvents(this.props.user.events)
     const charts = [
-      this.allRunsChart(allRuns),
+      this.positionOverTimeChart(allRuns),
+      this.durationOverTimeChart(allRuns),
       this.eventsChart(this.props.user.events)
     ]
 
@@ -55,17 +57,48 @@ class Portfolio extends Component {
           data: events.map(event => event.runs.length),
           backgroundColor: this.state.colorList
         }
-      ],
-      options: {
-        responsive: true
-      }
+      ]
     }
 
-    return <Chart chartType='pie' data={data} key='EVENTS_CHART' />
+    return (
+      <Chart 
+        chartType='pie'
+        data={data}
+        key='EVENTS_CHART' />
+    )
   
   }
+
+  positionOverTimeChart = runs => {
   
-  allRunsChart = runs => {
+    // Use colors to highlight the personal bests
+    const colors = runs.map(run => run.pb ? colorAssistant.green.string() : colorAssistant.black.string())
+
+    const data = {
+      labels: runs.map(run => moment(run.date).format('DD MMM YY')),
+      datasets: [
+        {
+          label: 'Position over time',
+          data: runs.map(run => run.position),
+          fill: false,
+          borderColor: colorAssistant.silver.string(),
+          pointBorderColor: colors,
+          pointBackgroundColor: colors,
+          pointRadius: 5,
+          pointHoverRadius: 10
+        }
+      ]
+    }
+
+    return (
+      <Chart 
+        chartType='line' 
+        data={data}
+        key='POS_OVER_TIME_CHART' />
+    )
+  }
+  
+  durationOverTimeChart = runs => {
   
     // Format the run data into a decimal 
     const runData = runs.map(run => {
@@ -74,23 +107,43 @@ class Portfolio extends Component {
     })
   
     // Use colors to highlight the personal bests
-    const colors = runs.map(run => run.pb ? 'rgba(0, 255, 0, 0.6)' : 'rgba(255, 99, 132, 0.6)')
-  
+    const colors = runs.map(run => run.pb ? colorAssistant.green.string() : colorAssistant.black.string())
+
     const data = {
       labels: runs.map(run => moment(run.date).format('DD MMM YY')),
-      datasets:[
+      datasets: [
         {
-          label: 'All time parkrun progress',
+          label: 'Durtion over time',
           data: runData,
-          backgroundColor: colors
+          fill: false,
+          borderColor: colorAssistant.silver.string(),
+          pointBorderColor: colors,
+          pointBackgroundColor: colors,
+          pointRadius: 5,
+          pointHoverRadius: 10
         }
-      ],
-      options: {
-        responsive: true
+      ]
+    }
+
+    const options = {
+      tooltips: {
+        callbacks: {
+          label: (tooltipItem, data) => {
+            const seconds = moment.duration(tooltipItem.yLabel, 'minutes').asSeconds()
+            return `Time taken: ${stringifyDuration(seconds)}`
+          }
+        }
       }
     }
 
-    return <Chart chartType='line' data={data} key='ALL_RUNS_CHART' />
+    return (
+      <Chart 
+        chartType='line' 
+        data={data}
+        options={options}
+        key='DUR_OVER_TIME' />
+    )
+
   }
   
   flatternUserEvents = events => {

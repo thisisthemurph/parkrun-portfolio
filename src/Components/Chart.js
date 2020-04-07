@@ -8,7 +8,7 @@ class Chart extends Component {
   render() {
     let chart;
     if (this.props.chartType === 'line') {
-      chart = <Line data={this.props.data} />
+      chart = <Line data={this.props.data} options={this.props.options || {}} />
     } else {
       chart = <Pie data={this.props.data} />
     }
