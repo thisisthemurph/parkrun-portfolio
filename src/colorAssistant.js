@@ -1,5 +1,9 @@
 const Color = require('color')
 
+/**
+ * These colours have been sourced from
+ * https://clrs.cc/
+ */
 export const colorAssistant = {
   'navy':     Color('rgb(0, 31, 63)'),
   'blue':     Color('rgb(0, 116, 217)'),
