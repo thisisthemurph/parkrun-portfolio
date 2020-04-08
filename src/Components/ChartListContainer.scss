@@ -1,0 +1,12 @@
+.ChartListContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 900px) {
+    .ChartListContainer {
+        // flex-direction: row;
+    }
+}

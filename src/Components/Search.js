@@ -1,11 +1,13 @@
 import React from 'react'
-// import './Search.css'
+import './Search.scss'
 
 function Search({searchChange, searchButtonClick}) {
   return (
-    <div>
+    <div className='Search'>
         <input type="text" inputMode="numeric" onChange={searchChange} />
-        <input type="button" value="Search" onClick={searchButtonClick} />
+        <div className='button-wrapper'>
+          <input class='button' type="button" value="Search" onClick={searchButtonClick} /> 
+        </div>
     </div>
   );
 }

@@ -3,8 +3,8 @@ import Loading from './Loading'
 import Overview from './Overview'
 import Chart from './Chart'
 import ChartListContainer from './ChartListContainer'
-import { colorAssistant, niceHexColors } from './colorAssistant'
-import { stringifyDuration } from './timeAssistant'
+import { colorAssistant, niceHexColors } from '../colorAssistant'
+import { stringifyDuration } from '../timeAssistant'
 
 import moment from 'moment'
 import _ from 'underscore'
@@ -14,7 +14,7 @@ import './Portfolio.scss'
 
 class Portfolio extends Component {
   state = {
-    colorList: _.shuffle(niceHexColors)
+    colorList: niceHexColors
   }
 
   render() {
@@ -39,11 +39,11 @@ class Portfolio extends Component {
     ]
 
     return (
-      <>
+      <div className='Portfolio'>
         <h2>{this.props.user.name}</h2>
         <Overview user={this.props.user} allRuns={allRuns} />
         <ChartListContainer charts={charts} />
-      </>
+      </div>
     )
   }
 

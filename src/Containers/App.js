@@ -65,7 +65,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1 className="App-header">Parkrun Portfolio</h1>
+        <h1 className="App-header">Parkrun Profile</h1>
         <Search 
           searchChange={this.onSearchChange}
           searchButtonClick={this.onSearchButtonClick}

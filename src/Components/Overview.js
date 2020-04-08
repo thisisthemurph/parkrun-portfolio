@@ -1,24 +1,26 @@
 import React from 'react';
 
-import { stringifyDuration } from './timeAssistant'
+import { stringifyDuration } from '../timeAssistant'
 
-// import './Overview.css';
+import './Overview.scss';
 
 function Overview({ user, allRuns }) {
-  const averageTime = stringifyDuration(getAverageRunningTime(allRuns))
-  const bestTime = stringifyDuration(getBestTime(allRuns))
-  const totalTime = stringifyDuration(getTotalRunningTime(allRuns))
+  const averageTimeSecs = getAverageRunningTime(allRuns)
+  const bestTimeSecs = getBestTime(allRuns)
+  const totalTimeSecs = getTotalRunningTime(allRuns)
   const totalDistance = allRuns.length * 5
+  const averageSpeed = totalDistance / totalTimeSecs * 60 * 60
 
   return (
     <div className='Overview'>
-      <p>You have completed {allRuns.length} runs in {user.eventCount} events</p>
-      <p>
-        <b>Average run time:</b> {averageTime}<br />
-        <b>Personal best:</b> {bestTime}<br />
-        <b>Total run time:</b> {totalTime}<br />
-        <b>Total run distance:</b> {totalDistance}km
-      </p>
+      <p className='tag'>You've completed <strong>{allRuns.length}</strong> runs at <strong>{user.eventCount}</strong> events</p>
+      <div className='stats'>
+        <p><strong>Average time:</strong> {stringifyDuration(averageTimeSecs)}</p>
+        <p><strong>PB:</strong> {stringifyDuration(bestTimeSecs)}</p>
+        <p><strong>Time ran:</strong> {stringifyDuration(totalTimeSecs)}</p>
+        <p><strong>Total distance:</strong> {totalDistance}km</p>
+        <p><strong>Average speed:</strong> {averageSpeed.toFixed(2)}km/ph</p>
+      </div>
     </div>
   );
 }

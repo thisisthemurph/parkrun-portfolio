@@ -1,0 +1,11 @@
+.Chart {
+    // border: solid 1px pink;
+    padding-bottom: 2em;
+    width: 100%;
+}
+
+@media (min-width: 900px) {
+    .Chart {
+        width: 50%;
+    }
+}
