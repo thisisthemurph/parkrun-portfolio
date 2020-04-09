@@ -37,17 +37,27 @@ class Portfolio extends Component {
     }
   
     const allRuns = this.flatternUserEvents(this.props.user.events)
-    const charts = [
-      this.positionOverTimeChart(allRuns),
-      this.durationOverTimeChart(allRuns),
-      this.eventsChart(this.props.user.events)
-    ]
+
+    if (allRuns.length > 0) {
+      const charts = [
+        this.positionOverTimeChart(allRuns),
+        this.durationOverTimeChart(allRuns),
+        this.eventsChart(this.props.user.events)
+      ]
+
+      return (
+        <div className='Portfolio'>
+          <h2>{this.props.user.name}</h2>
+          <Overview user={this.props.user} allRuns={allRuns} />
+          <ChartListContainer charts={charts} />
+        </div>
+      )
+    }
 
     return (
       <div className='Portfolio'>
         <h2>{this.props.user.name}</h2>
         <Overview user={this.props.user} allRuns={allRuns} />
-        <ChartListContainer charts={charts} />
       </div>
     )
   }

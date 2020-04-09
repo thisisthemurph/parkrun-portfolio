@@ -11,6 +11,16 @@ function Overview({ user, allRuns }) {
   const totalDistance = allRuns.length * 5
   const averageSpeed = totalDistance / totalTimeSecs * 60 * 60
 
+  if (allRuns.length === 0) {
+    return (
+      <div class='Overview'>
+        <p>You don't seem to have completed any park runs yet.</p>
+        <p>Get yourself out there, conquer the world!</p>
+        <p>Or maybe just a 5K will do for now...</p>
+      </div>
+    )
+  }
+
   return (
     <div className='Overview'>
       <p className='tag'>You've completed <strong>{allRuns.length}</strong> runs at <strong>{user.eventCount}</strong> events</p>
@@ -46,7 +56,7 @@ const getTotalRunningTime = runs => {
 
   return runs
     .map(run => run.time)
-    .reduce(summer)
+    .reduce(summer, 0)
 }
 
 export default Overview;
