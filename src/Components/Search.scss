@@ -11,19 +11,26 @@ $box-shadow:  0 14px 26px -12px $shadow-from,
               0 8px 10px -5px $shadow-to;
 
 .Search {
-    
-    input[type=text] {
-        font-size: 1.2em;
-        text-align: center;
-        padding: .5em;
-        border: solid 1px silver;
-        border-radius: 4px;
-    }
+    width: 100%;
+    max-width: 900px;
 
     .button-wrapper {
         padding : 20px 0;
+
+        display: flex;
+        justify-content: center;
+
+        input[type=text] {
+            margin-right: .7em;
+            font-size: 1.7em;
+            text-align: center;
+            border: solid 1px silver;
+            border-radius: 4px;
+            width: 70%;
+        }
+
         .button {
-            padding: 15px 50px;
+            padding: 10px 30px;
             text-transform: uppercase;
             background: $primary-color;
             border: 2px solid $primary-color;
@@ -35,7 +42,7 @@ $box-shadow:  0 14px 26px -12px $shadow-from,
 
             transition: all .4s;
 
-            &:hover {
+            &:hover, &:focus {
                 opacity: 0.8;
                 box-shadow: $box-shadow;
             }

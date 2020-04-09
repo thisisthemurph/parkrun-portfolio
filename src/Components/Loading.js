@@ -8,7 +8,7 @@ const loadingGifs = [
   "https://giphy.com/embed/5lLQ4I8vQYxJm",
   "https://giphy.com/embed/2y77qqREIzrQk",
   "https://giphy.com/embed/NRkK2XCXPd2Du",
-  "https://giphy.com/gifs/zebra-yOZ5hsdLjAp8Y",
+  "https://giphy.com/embed/yOZ5hsdLjAp8Y",
   "https://giphy.com/embed/3oEjHW0rhhhVopXFVm",
   "https://giphy.com/embed/l0MYyrLWpUM3YQSqs"
 ]
@@ -20,6 +20,7 @@ function Loading() {
       <div className='Loading-gif'>
         {getRandomGif()}
       </div>
+      <p>This can take some time, depending on how busy you've been!</p>
     </div>
   );
 }

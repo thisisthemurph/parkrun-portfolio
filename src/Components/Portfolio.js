@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Loading from './Loading'
+import Error from './Error'
 import Overview from './Overview'
 import Chart from './Chart'
 import ChartListContainer from './ChartListContainer'
@@ -19,13 +20,17 @@ class Portfolio extends Component {
 
   render() {
 
+    if (this.props.error) {
+      return <div className='Portfolio'><Error message={this.props.errorMessage} /></div>
+    }
+
     if (this.props.loading) {
       return <Loading />
     }
   
     if (Object.keys(this.props.user).length === 0) {
       return (
-        <div>
+        <div className='Portfolio'>
           <p>Enter your number and click search to view your profile</p>
         </div>
       )
