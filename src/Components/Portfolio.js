@@ -8,7 +8,6 @@ import { colorAssistant, niceHexColors } from '../colorAssistant'
 import { stringifyDuration } from '../timeAssistant'
 
 import moment from 'moment'
-import _ from 'underscore'
 
 import './Portfolio.scss'
 
