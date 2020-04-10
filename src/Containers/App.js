@@ -42,7 +42,7 @@ class App extends Component {
 
     this.setState({loading: true})
 
-    const res = await fetch(`http://localhost:5000/parkrun/api/${this.state.searchText}`)
+    const res = await fetch(`http://mmurphy.co.uk/parkrun/api/${this.state.searchText}`)
 
     this.setState({ 
       loading: false,
